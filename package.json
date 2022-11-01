@@ -1,20 +1,30 @@
 {
-  "name": "mobile-scroll",
+  "name": "news-vue3",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
+    "publish": "vite build --mode staging",
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.37"
+    "axios": "^0.27.2",
+    "js-cookie": "^3.0.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.3",
+    "vconsole": "^3.14.6",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.14",
+    "vue-virtual-list-v3": "^1.4.0",
+    "vue-virtual-scroller": "^1.0.10",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.0.3",
-    "typescript": "^4.6.4",
-    "vite": "^3.0.7",
-    "vue-tsc": "^0.39.5"
+    "@vitejs/plugin-vue": "^2.3.0",
+    "vite": "^2.9.0",
+    "vite-plugin-pwa": "^0.11.13",
+    "workbox-core": "^6.5.2",
+    "workbox-routing": "^6.5.2"
   }
 }

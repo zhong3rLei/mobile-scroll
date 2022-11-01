@@ -1,13 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="alternate icon" href="/favicon.ico" type="image/png" sizes="16x16">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue + TS</title>
-  </head>
-  <body>
+    <title>Vite App</title>
+    <script src="./intersection-observer.js"></script>
+    <script src="/bridge/cordova.js"></script>
+    <script src="./bridge.js"></script>
+</head>
+
+<body>
+    <script>
+        // 设置html标签字体大小
+        (function (ratio) {
+
+            // 各种特殊尺寸机型的比例
+            var offset = (function () {
+                var U = navigator.userAgent;
+                var is_ipad = U.indexOf('iPad') > -1;
+
+                return is_ipad ? 1.343 : 1;
+            })();
+
+            var sreen_info = (function () {
+                var el = document.createElement('div');
+                var st = el.style;
+
+                st.width = '1in';
+                st.left = '-100%';
+                st.position = 'absolute';
+
+                return function () {
+                    document.body.appendChild(el);
+
+                    var devicePixelRatio = window.devicePixelRatio || 1;
+                    var dpi = el.offsetWidth * devicePixelRatio;
+
+                    document.body.removeChild(el);
+
+                    return {
+                        dpi: dpi,
+                        ratio: devicePixelRatio
+                    };
+                }
+            })();
+
+            var st = document.documentElement.style;
+
+            function update() {
+                var info = sreen_info();
+                var size = info.dpi / 25.4; // 每毫米像素点数
+                st.fontSize = size * ratio * offset / info.ratio + 'px';
+            }
+
+            update();
+
+            window.addEventListener('load', update);
+            window.addEventListener('resize', update);
+
+        })(3.4);
+    </script>
+    <script>
+        document.addEventListener("deviceready", function () {
+            cordova.exec(function () {}, function (err) {}, "InteractiveBasePlugin", "ready", [])
+        });
+        // 用于移动端激活::active
+        document.body.addEventListener("touchstart", function () {});
+    </script>
     <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>

@@ -1,0 +1,3 @@
+[submodule "src/plugins/vue-futures"]
+	path = src/plugins/vue-futures
+	url = http://10.10.10.154:6060/WebApp/vue-futures.git
